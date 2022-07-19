@@ -32,7 +32,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn
-    - run: yarn build
     - run: yarn test
       env:
         CI: true
@@ -50,3 +49,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn
+    - run: yarn lint
+      env:
+        CI: true
