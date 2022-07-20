@@ -26,11 +26,12 @@ export function EventTitle({ title, onTitleChange, onSubmit }: EventTitleProps):
       <input
         autoFocus={ true }
         className={`
-          bg-red-100
           h-8 w-full
           mb-2 pb-2
           outline-none
-          text-black font-bold text-black leading-6 text-xl
+          placeholder-grayscale-400
+          text-black font-bold
+          event-title-input
         `}
         data-testid='event-title'
         placeholder='Event name'

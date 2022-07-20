@@ -30,7 +30,7 @@ export function AttendeeSuggestions({
         absolute top-0
         rounded-lg
         elevation-400
-        w-60 p-2
+        w-60 p-1
         z-10
       `}
     >
@@ -61,7 +61,7 @@ function AttendeeSuggestion({ attendee, isActive, onClick }: AttendeeSuggestion)
       className={`
         ${ isActive ? 'bg-grayscale-50' : 'bg-white' }
         cursor-pointer
-        flex items-center
+        flex items-center gap-2	
         rounded-md
         px-4 py-3
         w-full
