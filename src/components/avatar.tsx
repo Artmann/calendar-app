@@ -11,7 +11,7 @@ export function Avatar({ alt, data }: AvatarProps): ReactElement {
   return (
     <img
       alt={ alt }
-      className='h-6 w-6 rounded-full mr-2'
+      className='h-6 w-6 rounded-full'
       src={ src }
     />
   )

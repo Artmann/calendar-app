@@ -33,8 +33,8 @@ export function AttendeeSuggestions({
         bg-white
         absolute top-0
         rounded-lg
-        shadow-lg	
-        w-60 p-2
+        elevation-400
+        w-60 p-1
         z-10
       `}
     >
@@ -68,7 +68,7 @@ function AttendeeSuggestion({ attendee, isActive, query, onClick }: AttendeeSugg
       className={`
         ${ isActive ? 'bg-grayscale-50' : 'bg-white' }
         cursor-pointer
-        flex items-center
+        flex items-center gap-2	
         rounded-md
         px-4 py-3
         w-full

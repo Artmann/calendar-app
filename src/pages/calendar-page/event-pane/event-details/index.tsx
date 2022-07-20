@@ -11,7 +11,13 @@ export function EventDetails({ attendees }: EventDetailsProps): ReactElement {
   return (
     <div className='flex w-full'>
       
-      <div className='text-grayscale-600 font-medium text-sm pr-8'>
+      <div
+        className={`
+          text-grayscale-600 
+          font-medium text-sm leading-4
+          pr-8
+        `}
+      >
         Attendees
       </div>
 
@@ -30,7 +36,7 @@ type AttendeeRowProps = {
 function AttendeeRow({ attendee }: AttendeeRowProps): ReactElement {
   return (
     <div
-      className='flex mb-2 items-center'
+      className='flex mb-2 items-center gap-2'
       data-testid='attendee-row'
     >
       
@@ -43,10 +49,10 @@ function AttendeeRow({ attendee }: AttendeeRowProps): ReactElement {
         <div data-testid='attendee-row-name'>
           { attendee.name }
         </div>
-        <div className='text-grayscale-600 text-2xs flex items-center leading-3'>
+        <div className='text-grayscale-600 text-2xs flex items-center gap-0.5	leading-3'>
           
           <svg
-            className='mr-0.5'
+            className=''
             width="12"
             height="12"
             viewBox="0 0 12 13"
