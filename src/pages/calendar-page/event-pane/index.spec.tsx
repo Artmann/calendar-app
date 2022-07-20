@@ -31,8 +31,10 @@ describe('Event Pane', () => {
       'Ric'
     )
 
-    expect(screen.getByText('Rick Pastoor')).toBeInTheDocument()
-    expect(screen.getByText('Ricciardo Something')).toBeInTheDocument()
+    const suggestedAttendeeNames = screen.getAllByTestId('attendee-suggestion-name')
+
+    expect(suggestedAttendeeNames[0]).toHaveTextContent('Rick Pastoor')
+    expect(suggestedAttendeeNames[1]).toHaveTextContent('Ricciardo Something')
   })
 
   it('invites the suggested attendee when the form is submitted.', async () => {
@@ -78,9 +80,9 @@ describe('Event Pane', () => {
       'Ric'
     )
 
-    await userEvent.click(
-      screen.getByText('Ricciardo Something')
-    )
+    const suggestedAttendeeNames = screen.getAllByTestId('attendee-suggestion-name')
+
+    await userEvent.click(suggestedAttendeeNames[1])
 
     expect(screen.getByTestId('attendee-row-name')).toHaveTextContent('Ricciardo Something')
   })
@@ -135,6 +137,44 @@ describe('Event Pane', () => {
     expect(attendeeNames[0]).toHaveTextContent('Rick Pastoor')
     expect(attendeeNames[1]).toHaveTextContent('Emiel Janson')
 
+  })
+
+  it('highligts the part of the name and email that matches the title', async () => {
+    const context: CalendarContextProps = {
+      acquaintances,
+      attendees: [],
+      addAttendee: jest.fn()
+    }
+
+    render(
+      <CalendarContext.Provider value={ context }>
+        <EventPane />
+      </CalendarContext.Provider>
+    )
+
+    await userEvent.type(
+      screen.getByTestId('event-title'),
+      'Ric'
+    )
+
+    // NOTE: Using a query selector to find the highlighted element is
+    // fragile, but will work for now.
+
+    const suggestedAttendeeNames = screen.getAllByTestId('attendee-suggestion-name')
+
+    expect(suggestedAttendeeNames[0]).toHaveTextContent('Rick Pastoor')
+    expect(suggestedAttendeeNames[1]).toHaveTextContent('Ricciardo Something')
+
+    expect(suggestedAttendeeNames[0].querySelector('mark')).toHaveClass('text-primary')
+    expect(suggestedAttendeeNames[1].querySelector('mark')).toHaveClass('text-primary')
+
+    const suggestedAttendeeEmails = screen.getAllByTestId('attendee-suggestion-email')
+
+    expect(suggestedAttendeeEmails[0]).toHaveTextContent('rick@risecalendar.com')
+    expect(suggestedAttendeeEmails[1]).toHaveTextContent('ricciardo@gmail.com')
+
+    expect(suggestedAttendeeEmails[0].querySelector('mark')).toHaveClass('text-primary')
+    expect(suggestedAttendeeEmails[1].querySelector('mark')).toHaveClass('text-primary')
   })
 
 })

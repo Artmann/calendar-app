@@ -18,6 +18,11 @@ export function EventPane(): ReactElement {
   const [ title, setTitle ] = useState('')
   const [ showSuggestions, setShowSuggestions ] = useState(false)
 
+  const { suggestedAttendees, query } = useMemo(
+    () => suggestAttendesBasedOnTitle(title, acquaintances, attendees),
+    [ acquaintances, attendees, title ]
+  )
+
   // When an Acquaintance is added to the event, the suggestions are hidden and the person
   // is added to the event as an Attendee.
   const inviteAquaintance = (acquaintance: Acquaintance): void => {
@@ -58,11 +63,6 @@ export function EventPane(): ReactElement {
     setShowSuggestions(true)
   }
 
-  const suggestedAttendees = useMemo(
-    () => suggestAttendesBasedOnTitle(title, acquaintances, attendees),
-    [ acquaintances, attendees, title ]
-  )
-
   return (
     <Pane testId='event-pane'>
       
@@ -77,6 +77,7 @@ export function EventPane(): ReactElement {
         <AttendeeSuggestions
           isVisible={ showSuggestions }
           suggestedAttendees={ suggestedAttendees }
+          query={ query}
           onSelectedAttendee={ onSelectedAttendeeHandler }
         />
 
