@@ -4,10 +4,25 @@ import { Avatar } from '../../../../components/avatar'
 import { Acquaintance } from '../../acquaintances'
 
 type AttendeeSuggestionsProps = {
+  isVisible: boolean
   suggestedAttendees: Acquaintance[]
+
+  onSelectedAttendee: (attendee: Acquaintance) => void
 }
 
-export function AttendeeSuggestions({ suggestedAttendees }: AttendeeSuggestionsProps): ReactElement {
+export function AttendeeSuggestions({
+  isVisible,
+  suggestedAttendees,
+  onSelectedAttendee
+}: AttendeeSuggestionsProps): ReactElement | null {
+  if (!isVisible) {
+    return null
+  }
+  
+  if (suggestedAttendees.length === 0) {
+    return null
+  }
+  
   return (
     <div
       className={`
@@ -24,6 +39,7 @@ export function AttendeeSuggestions({ suggestedAttendees }: AttendeeSuggestionsP
           <AttendeeSuggestion
             attendee={ attendee }
             isActive={ index === 0 }
+            onClick={ () => onSelectedAttendee(attendee) }
             key={ attendee.id } 
           />
         ) 
@@ -35,9 +51,11 @@ export function AttendeeSuggestions({ suggestedAttendees }: AttendeeSuggestionsP
 type AttendeeSuggestion = {
   attendee: Acquaintance
   isActive: boolean
+
+  onClick: () => void
 }
 
-function AttendeeSuggestion({ attendee, isActive }: AttendeeSuggestion): ReactElement {
+function AttendeeSuggestion({ attendee, isActive, onClick }: AttendeeSuggestion): ReactElement {
   return (
     <div
       className={`
@@ -48,6 +66,7 @@ function AttendeeSuggestion({ attendee, isActive }: AttendeeSuggestion): ReactEl
         px-4 py-3
         w-full
       `}
+      onClick={ onClick }
     >
 
       <Avatar
