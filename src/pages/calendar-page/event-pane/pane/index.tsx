@@ -11,7 +11,7 @@ export function Pane({ children, testId }: PaneProps): ReactElement {
     <div
       className={`
         bg-white
-        shadow
+        elevation-100
         w-80 h-full
       `}
       data-testid={ testId }
