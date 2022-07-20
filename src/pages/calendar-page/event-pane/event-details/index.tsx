@@ -29,7 +29,10 @@ type AttendeeRowProps = {
 
 function AttendeeRow({ attendee }: AttendeeRowProps): ReactElement {
   return (
-    <div className='flex mb-2 items-center'>
+    <div
+      className='flex mb-2 items-center'
+      data-testid='attendee-row'
+    >
       
       <Avatar
         alt={ attendee.name }
@@ -37,7 +40,7 @@ function AttendeeRow({ attendee }: AttendeeRowProps): ReactElement {
       />
 
       <div className='text-sm text-black font-medium leading-4'>
-        <div>
+        <div data-testid='attendee-row-name'>
           { attendee.name }
         </div>
         <div className='text-grayscale-600 text-2xs flex items-center leading-3'>

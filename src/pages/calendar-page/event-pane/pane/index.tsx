@@ -11,7 +11,6 @@ export function Pane({ children, testId }: PaneProps): ReactElement {
     <div
       className={`
         bg-white
-        relative
         shadow
         w-80 h-full
       `}
