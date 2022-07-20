@@ -29,7 +29,7 @@ export function AttendeeSuggestions({
         bg-white
         absolute top-0
         rounded-lg
-        shadow-lg	
+        elevation-400
         w-60 p-2
         z-10
       `}
