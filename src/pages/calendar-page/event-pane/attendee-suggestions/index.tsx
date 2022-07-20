@@ -1,19 +1,23 @@
 import { ReactElement } from 'react'
+import Highlighter from 'react-highlight-words'
 
 import { Avatar } from '../../../../components/avatar'
 import { Acquaintance } from '../../acquaintances'
 
 type AttendeeSuggestionsProps = {
   isVisible: boolean
-  suggestedAttendees: Acquaintance[]
-
+  suggestedAttendees: Acquaintance[],
+  
   onSelectedAttendee: (attendee: Acquaintance) => void
+  
+  query?: string,
 }
 
 export function AttendeeSuggestions({
   isVisible,
   suggestedAttendees,
-  onSelectedAttendee
+  onSelectedAttendee,
+  query = ''
 }: AttendeeSuggestionsProps): ReactElement | null {
   if (!isVisible) {
     return null
@@ -40,6 +44,8 @@ export function AttendeeSuggestions({
             attendee={ attendee }
             isActive={ index === 0 }
             onClick={ () => onSelectedAttendee(attendee) }
+            query={ query }
+            
             key={ attendee.id } 
           />
         ) 
@@ -51,11 +57,12 @@ export function AttendeeSuggestions({
 type AttendeeSuggestion = {
   attendee: Acquaintance
   isActive: boolean
+  query: string
 
   onClick: () => void
 }
 
-function AttendeeSuggestion({ attendee, isActive, onClick }: AttendeeSuggestion): ReactElement {
+function AttendeeSuggestion({ attendee, isActive, query, onClick }: AttendeeSuggestion): ReactElement {
   return (
     <div
       className={`
@@ -76,12 +83,30 @@ function AttendeeSuggestion({ attendee, isActive, onClick }: AttendeeSuggestion)
 
       <div className='font-medium'>
 
-        <div className='text-sm text-black leading-4'>
-          { attendee.name }
+        <div
+          className='text-sm text-black leading-4'
+          data-testid='attendee-suggestion-name'
+        >
+          <Highlighter
+            highlightClassName='text-primary'
+            highlightStyle={{ backgroundColor: 'transparent' }}
+            searchWords={ [ query ]}
+            autoEscape={true}
+            textToHighlight={ attendee.name }
+          />
         </div>
         
-        <div className='text-2xs text-grayscale-600 leading-3'>
-          { attendee.email }
+        <div
+          className='text-2xs text-grayscale-600 leading-3'
+          data-testid='attendee-suggestion-email'
+        >
+          <Highlighter
+            highlightClassName='text-primary'
+            highlightStyle={{ backgroundColor: 'transparent' }}
+            searchWords={ [ query ]}
+            autoEscape={true}
+            textToHighlight={ attendee.email }
+          />
         </div>
 
       </div>

@@ -8,13 +8,13 @@ describe('suggestions', () => {
     it('does not return any suggestions for an empty title.', () => {
       const suggestions = suggestAttendesBasedOnTitle('', acquaintances)
       
-      expect(suggestions).toEqual([])
+      expect(suggestions.suggestedAttendees).toEqual([])
     })
 
     it('returns acquaintances where the title matches a first name.', () => {
       const suggestions = suggestAttendesBasedOnTitle('Em', acquaintances)
 
-      expect(suggestions.map(s => s.name)).toEqual([
+      expect(suggestions.suggestedAttendees.map(s => s.name)).toEqual([
         'Emiel Janson',
         'Emily Gevalli',
         'Emielio Castillo'
@@ -27,7 +27,7 @@ describe('suggestions', () => {
         acquaintances
       )
 
-      expect(suggestions.map(s => s.name)).toEqual([
+      expect(suggestions.suggestedAttendees.map(s => s.name)).toEqual([
         'Rick Pastoor',
         'Ricciardo Something'
       ])
@@ -36,7 +36,7 @@ describe('suggestions', () => {
     it('returns acquaintances where the title matches a last name.', () => {
       const suggestions = suggestAttendesBasedOnTitle('Gev', acquaintances)
 
-      expect(suggestions.map(s => s.name)).toEqual([
+      expect(suggestions.suggestedAttendees.map(s => s.name)).toEqual([
         'Emily Gevalli'
       ])
     })
@@ -48,7 +48,7 @@ describe('suggestions', () => {
         [ acquaintances[0] ]
       )
 
-      expect(suggestions.map(s => s.name)).toEqual([
+      expect(suggestions.suggestedAttendees.map(s => s.name)).toEqual([
         'Emily Gevalli',
         'Emielio Castillo'
       ])
@@ -60,7 +60,7 @@ describe('suggestions', () => {
         acquaintances
       )
 
-      expect(suggestions.map(s => s.name)).toEqual([])
+      expect(suggestions.suggestedAttendees.map(s => s.name)).toEqual([])
     }) 
 
   })

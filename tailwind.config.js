@@ -10,6 +10,7 @@ module.exports = {
       'grayscale-50': '#F1F2F6',
       'grayscale-400': '#BDBFC5',
       'grayscale-600': '#848793',
+      'primary': '#017AFF',
       'white': '#FFF'
     },
     extend: {},
